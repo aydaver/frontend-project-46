@@ -1,0 +1,15 @@
+{
+  "name": "@hexlet/code",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "[![Actions Status](https://github.com/aydaver/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/aydaver/frontend-project-46/actions)",
+  "main": "src/bin/gendiff.js",
+  "scripts": {
+    "test": "gendiff"
+  },
+  "author": "aydaver",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^12.1.0"
+  }
+}
