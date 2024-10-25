@@ -44,7 +44,7 @@ jobs:
         uses: paambaati/codeclimate-action@v5.0.0
 
         env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          CC_TEST_REPORTER_ID: ${{ secrets.cfba0f72a7a429078afce45448e7f3e8c2fcd93cbb6edb53229a4a474ffd0377 }}
         with:
           coverageCommand: make test-coverage
           debug: true
