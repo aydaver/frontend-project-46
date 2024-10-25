@@ -26,7 +26,7 @@ jobs:
         uses: hexlet/project-action@release
         with:
           hexlet-id: ${{ secrets.HEXLET_ID }}
-          
+
       - uses: actions/checkout@v4
 
       - name: Use Node.js ${{ matrix.node-version }}
@@ -36,7 +36,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-
-      - run: make install
+          
       - run: make lint
       - run: make test
