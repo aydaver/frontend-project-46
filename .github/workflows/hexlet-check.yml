@@ -28,7 +28,7 @@ jobs:
 
     steps:
       - name: making lint
-        run: make lint
+        run: npx eslint
   test:
     name: Run tests
     runs-on: ubuntu-latest
