@@ -3,14 +3,14 @@
 import { program } from 'commander';
 
 // eslint-disable-next-line import/extensions
-import parser from './gendiff-parser.js';
+import parser from './gendiff-parser-json.js';
 
 // eslint-disable-next-line import/extensions
-import genDiff from './gendiff-differ.js';
+import gendiff from './gendiff-differ-json.js';
 
 const command = (file1path, file2path) => {
   // eslint-disable-next-line no-console
-  console.log(genDiff(parser(file1path, file2path)));
+  console.log(gendiff(parser(file1path, file2path)));
 };
 
 program

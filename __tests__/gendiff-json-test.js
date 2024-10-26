@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/extensions
-import genDiff from '../src/bin/gendiff-differ.js';
+import genDiff from '../src/bin/gendiff-differ-json.js';
 
 describe('genDiff', () => {
   test('два объекта с одинаковыми ключами и значениями', () => {
