@@ -1,40 +1,53 @@
 // eslint-disable-next-line import/extensions
-import genDiff from '../src/bin/gendiff-differ-json.js';
+import gendiff from '../src/bin/gendiff-differ-json.js';
 
-describe('genDiff', () => {
-  test('два объекта с одинаковыми ключами и значениями', () => {
-    const obj1 = { a: 1, b: 2 };
-    const obj2 = { a: 1, b: 2 };
-    expect(genDiff([obj1, obj2])).toBe('{\n    a: 1\n    b: 2\n}');
+describe('Тесты для функции gendiff', () => {
+  test('Тест на равные объекты', () => {
+    const object1 = { a: 1, b: 2 };
+    const object2 = { a: 1, b: 2 };
+    const result = gendiff([object1, object2]);
+    expect(result).toBe('0  a: 1\n0  b: 2');
   });
 
-  test('два объекта с разными значениями', () => {
-    const obj1 = { a: 1, b: 2 };
-    const obj2 = { a: 1, b: 3 };
-    expect(genDiff([obj1, obj2])).toBe('{\n    a: 1\n  - b: 2\n  + b: 3\n}');
+  test('Тест на разные объекты', () => {
+    const object1 = { a: 1, b: 2 };
+    const object2 = { a: 1, b: 3 };
+    const result = gendiff([object1, object2]);
+    expect(result).toBe('0  a: 1\n0- b: 2\n0+ b: 3');
   });
 
-  test('ключи только в одном объекте', () => {
-    const obj1 = { a: 1 };
-    const obj2 = { b: 2 };
-    expect(genDiff([obj1, obj2])).toBe('{\n  - a: 1\n  + b: 2\n}');
+  test('Тест на отсутствие ключа в первом объекте', () => {
+    const object1 = { a: 1 };
+    const object2 = { a: 1, b: 2 };
+    const result = gendiff([object1, object2]);
+    expect(result).toBe('0  a: 1\n0+ b: 2');
   });
 
-  test('один объект пустой', () => {
-    const obj1 = {};
-    const obj2 = { a: 1 };
-    expect(genDiff([obj1, obj2])).toBe('{\n  + a: 1\n}');
+  test('Тест на отсутствие ключа во втором объекте', () => {
+    const object1 = { a: 1, b: 2 };
+    const object2 = { a: 1 };
+    const result = gendiff([object1, object2]);
+    expect(result).toBe('0  a: 1\n0- b: 2');
   });
 
-  test('оба объекта пустые', () => {
-    const obj1 = {};
-    const obj2 = {};
-    expect(genDiff([obj1, obj2])).toBe('{\n  \n}');
+  test('Тест на вложенные объекты', () => {
+    const object1 = { a: { b: 3 } };
+    const object2 = { a: { b: 4 } };
+    const result = gendiff([object1, object2]);
+    expect(result).toBe('0  a:\n1- b: 3\n1+ b: 4');
   });
 
-  test('разные ключи и значения', () => {
-    const obj1 = { a: 1, c: 3 };
-    const obj2 = { b: 2, c: 4 };
-    expect(genDiff([obj1, obj2])).toBe('{\n  - a: 1\n  + b: 2\n  - c: 3\n  + c: 4\n}');
+  test('Тест на разные типы значений', () => {
+    const object1 = { a: 1, b: 'string' };
+    const object2 = { a: 1, b: 2 };
+    const result = gendiff([object1, object2]);
+    expect(result).toBe('0  a: 1\n0- b: string\n0+ b: 2');
+  });
+
+  test('Тест на значения null', () => {
+    const object1 = { a: 1, b: null };
+    const object2 = { a: 1, b: 2 };
+    const result = gendiff([object1, object2]);
+    expect(result).toBe('0  a: 1\n0- b: null\n0+ b: 2');
   });
 });

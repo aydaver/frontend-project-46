@@ -1,22 +1,31 @@
 #!/usr/bin/env node
 
+/* eslint-disable import/extensions */
+
 import { program } from 'commander';
 
-// eslint-disable-next-line import/extensions
-import parser from './gendiff-parser-json.js';
-
-// eslint-disable-next-line import/extensions
 import gendiff from './gendiff-differ-json.js';
 
-const command = (file1path, file2path) => {
+import parse from './gendiff-parser.js';
+
+import stylish from './formater-stylish.js';
+
+const formatters = {
+  // eslint-disable-next-line global-require
+  stylish,
+};
+
+const command = (file1path, file2path, options) => {
+  const { format } = options;
+  const diff = gendiff(parse(file1path, file2path));
   // eslint-disable-next-line no-console
-  console.log(gendiff(parser(file1path, file2path)));
+  console.log(formatters[format](diff));
 };
 
 program
   .action(command)
-  .arguments('file1path file2path')
+  .arguments('<file1path> <file2path>')
   .version('1.0.0')
   .description('Compares two configuration files and shows a difference.')
-  .option('-f, --format [type]', 'output format')
+  .option('-f, --format <type>', 'output format', 'stylish')
   .parse(process.argv);
