@@ -1,0 +1,11 @@
+{"version": 2, "width": 226, "height": 36, "timestamp": 1730894196, "env": {"SHELL": "/bin/bash", "TERM": "xterm-256color"}}
+[0.228036, "o", "\u001b[?2004h\u001b]0;aydaver@DESKTOP-7BPIKF0: ~/repositories/frontend-project-46\u0007\u001b[01;32maydaver@DESKTOP-7BPIKF0\u001b[00m:\u001b[01;34m~/repositories/frontend-project-46\u001b[00m$ "]
+[3.053746, "o", "\u001b[7mgendiff --format plain  __tests__/__fixtures__/file1diffi.yml __tests__/__fixtures__/file2diffi.yml\u001b[27m"]
+[4.525189, "o", "\r\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[Cgendiff --format plain  __tests__/__fixtures__/file1diffi.yml __tests__/__fixtures__/file2diffi.yml\r\n\u001b[?2004l\r"]
+[4.5879, "o", "Property common.follow was added. With value: false\r\nProperty common.setting2 was removed.\r\nProperty common.setting3 was updated. From true to null\r\nProperty common.setting4 was added. With value: 'blah blah'\r\nProperty common.setting5 was added. With value: [complex value]\r\nProperty common.setting6.doge.wow was updated. From '' to 'so much'\r\nProperty common.setting6.ops was added. With value: 'vops'\r\nProperty group1.baz was updated. From 'bas' to 'bars'\r\nProperty group1.nest was updated. From [complex value] to '1+ nest: str'\r\nProperty group2 was removed.\r\nProperty group3 was added. With value: [complex value]\r\n"]
+[4.593131, "o", "\u001b[?2004h\u001b]0;aydaver@DESKTOP-7BPIKF0: ~/repositories/frontend-project-46\u0007\u001b[01;32maydaver@DESKTOP-7BPIKF0\u001b[00m:\u001b[01;34m~/repositories/frontend-project-46\u001b[00m$ "]
+[6.915969, "o", "e"]
+[7.020125, "o", "x"]
+[7.20131, "o", "i"]
+[7.327041, "o", "t"]
+[7.464946, "o", "\r\n\u001b[?2004l\rexit\r\n"]

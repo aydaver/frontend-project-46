@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable no-console */
 
 /* eslint-disable import/extensions */
 
@@ -8,17 +9,19 @@ import gendiff from './gendiff-differ-json.js';
 
 import parse from './gendiff-parser.js';
 
-import stylish from './formater-stylish.js';
+import stylish from './formatters/formatter-stylish.js';
+
+import plain from './formatters/formatter-plain.js';
 
 const formatters = {
   // eslint-disable-next-line global-require
   stylish,
+  plain,
 };
 
 const command = (file1path, file2path, options) => {
   const { format } = options;
   const diff = gendiff(parse(file1path, file2path));
-  // eslint-disable-next-line no-console
   console.log(formatters[format](diff));
 };
 

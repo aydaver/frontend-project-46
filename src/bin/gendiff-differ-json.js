@@ -12,8 +12,6 @@ function gendiff(objects) {
     keys.forEach((key) => {
       const value1 = obj1[key];
       const value2 = obj2[key];
-
-      // Обработка случаев, когда ключ есть только в одном объекте
       if (value1 !== undefined && value2 === undefined) {
         if (typeof value1 === 'object' && value1 !== null) {
           result.push(`${indent}- ${key}:`);
@@ -36,12 +34,11 @@ function gendiff(objects) {
         result.push(`${indent}+ ${key}: null`);
       } else if (typeof value1 === 'object' && value1 !== null && typeof value2 === 'object' && value2 !== null && !Array.isArray(value1) && !Array.isArray(value2)) {
         result.push(`${indent}  ${key}:`);
-        compareObjects(value1, value2, indent + 1); // увеличиваем отступ
+        compareObjects(value1, value2, indent + 1);
       } else if (value1 === value2) {
         result.push(`${indent}  ${key}: ${(value1)}`);
       } else {
         if (typeof value1 === 'object' && value1 !== null) {
-          // Обработка случая, когда типы данных различаются
           result.push(`${indent}- ${key}:`);
           compareObjects(value1, value1, indent + 1);
         } else {
