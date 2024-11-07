@@ -13,10 +13,13 @@ import stylish from './formatters/formatter-stylish.js';
 
 import plain from './formatters/formatter-plain.js';
 
+import json from './formatters/formatter-json.js';
+
 const formatters = {
   // eslint-disable-next-line global-require
   stylish,
   plain,
+  json,
 };
 
 const command = (file1path, file2path, options) => {
