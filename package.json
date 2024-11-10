@@ -16,6 +16,7 @@
     "yaml": "^2.6.0"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.25.9",
     "eslint": "^8.57.1",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.31.0",
@@ -27,7 +28,15 @@
   "eslintConfig": {
     "extends": "airbnb",
     "env": {
-      "jest": true
-    }
+      "jest": true,
+      "es2021": true,
+      "browser": true,
+      "node": true
+    },
+    "parser": "@babel/eslint-parser",
+    "parserOptions": {
+    "ecmaVersion": 2021,
+    "requireConfigFile": false
+  }
   }
 }
