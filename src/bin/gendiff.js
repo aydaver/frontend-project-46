@@ -1,6 +1,7 @@
 #!/usr/bin/env node
+/* eslint-disable import/no-named-as-default-member */
+/* eslint-disable import/no-named-as-default */
 /* eslint-disable no-console */
-
 /* eslint-disable import/extensions */
 
 import { program } from 'commander';
@@ -16,7 +17,6 @@ import plain from './formatters/formatter-plain.js';
 import json from './formatters/formatter-json.js';
 
 const formatters = {
-  // eslint-disable-next-line global-require
   stylish,
   plain,
   json,

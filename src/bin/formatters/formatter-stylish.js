@@ -1,68 +1,43 @@
-/* eslint-disable max-len */
+#!/usr/bin/env node
 function stylish(str) {
   const array = str.split('\n');
-  array.splice(0, 0, '{');
+  array.unshift('{');
   array.push('}');
   const result = [];
-  const spaces = (string) => {
-    const num = ((Number(string[0]) + 1) * 4) - 2;
-    return num;
-  };
-  // eslint-disable-next-line no-restricted-syntax
+
+  const spaces = (level) => ' '.repeat((Number(level) + 1) * 4 - 2);
+
   for (let i = 0; i < array.length; i += 1) {
+    const currentLevel = Number(array[i][0]);
+    const nextLevel = Number(array[i + 1]?.[0]);
+    const lineContent = array[i].slice(1); 
+
     if (array[i] === '}' || array[i] === '{') {
-      result.push(`${array[i]}`);
-    } else if (array[i - 1] === '{') {
-      result.push(' '.repeat(spaces(array[i])).concat(`${array[i].slice(1)} {`));
+      result.push(array[i]);
+    } else if (currentLevel < nextLevel) {
+      result.push(`${spaces(currentLevel)}${lineContent} {`);
+    } else if (currentLevel > nextLevel) {
+      result.push(`${spaces(currentLevel)}${lineContent}`);
+      if (currentLevel - nextLevel > 1) {
+        for (let j = 0; j < currentLevel - nextLevel - 1; j += 1) {
+          result.push(`${spaces(currentLevel - j - 1)}  }`);
+        }
+      }
+      result.push(`${spaces(nextLevel)}  }`);
     } else if (array[i + 1] === '}') {
-      result.push(' '.repeat(spaces(array[i])).concat(`${array[i].slice(1)}\n`.concat(' '.repeat(spaces(array[i]) - 2)).concat('}')));
-    } else if (Number(array[i][0]) > Number(array[i + 1][0]) && Number(array[i][0]) > Number(array[i - 1][0])) {
-      if ((Number(array[i][0]) - Number(array[i + 1][0])) > 1) {
-        result.push(' '.repeat(spaces(array[i])).concat(`${array[i].slice(1)}\n`.concat(' '.repeat(spaces(array[i]) - 2)).concat('}')));
-        let counter = spaces(array[i]) - 2;
-        for (let ind = 1; ind < (Number(array[i][0]) - Number(array[i + 1][0])); ind += 1) {
-          counter -= 4;
-          result.push(' '.repeat(counter).concat('}'));
+      result.push(`${spaces(currentLevel)}${lineContent}`);
+      if (currentLevel > 0) {
+        for (let j = 0; j < currentLevel; j += 1) {
+          result.push(`${spaces(currentLevel - j - 1 )}  }`);
         }
-      } else if (!array[i].includes(':')) {
-        result.push(' '.repeat(spaces(array[i])).concat(`${array[i].slice(1)}`));
-      } else {
-        result.push(' '.repeat(spaces(array[i])).concat(`${array[i].slice(1)}\n`.concat(' '.repeat(spaces(array[i]) - 2)).concat('}')));
-      }
-    } else if (Number(array[i][0]) < Number(array[i + 1][0]) && Number(array[i][0]) < Number(array[i - 1][0])) {
-      result.push(' '.repeat(spaces(array[i])).concat(`${array[i].slice(1)} {`));
-    } else if (Number(array[i][0]) > Number(array[i + 1][0]) && Number(array[i][0]) < Number(array[i - 1][0])) {
-      if ((Number(array[i][0]) - Number(array[i + 1][0])) > 1) {
-        result.push(' '.repeat(spaces(array[i])).concat(`${array[i].slice(1)}\n`.concat(' '.repeat(spaces(array[i]) - 2)).concat('}')));
-        let counter = spaces(array[i]) - 2;
-        for (let ind = 1; ind < (Number(array[i][0]) - Number(array[i + 1][0])); ind += 1) {
-          counter -= 4;
-          result.push(' '.repeat(counter).concat('}'));
-        }
-      } else {
-        result.push(' '.repeat(spaces(array[i])).concat(`${array[i].slice(1)}\n`.concat(' '.repeat(spaces(array[i]) - 2)).concat('}')));
-      }
-    } else if (Number(array[i][0]) < Number(array[i + 1][0]) && Number(array[i][0]) > Number(array[i - 1][0])) {
-      result.push(' '.repeat(spaces(array[i])).concat(`${array[i].slice(1)} {`));
-    } else if (Number(array[i][0]) === Number(array[i + 1][0])) {
-      result.push(' '.repeat(spaces(array[i])).concat(`${array[i].slice(1)}`));
-    } else if (Number(array[i][0]) < Number(array[i + 1][0]) && Number(array[i][0]) === Number(array[i - 1][0])) {
-      result.push(' '.repeat(spaces(array[i])).concat(`${array[i].slice(1)} {`));
-    } else if (Number(array[i][0]) > Number(array[i + 1][0]) && Number(array[i][0]) === Number(array[i - 1][0])) {
-      if ((Number(array[i][0]) - Number(array[i + 1][0])) > 1) {
-        result.push(' '.repeat(spaces(array[i])).concat(`${array[i].slice(1)}\n`.concat(' '.repeat(spaces(array[i]) - 2)).concat('}')));
-        let counter = spaces(array[i]) - 2;
-        for (let ind = 1; ind < (Number(array[i][0]) - Number(array[i + 1][0])); ind += 1) {
-          counter -= 4;
-          result.push(' '.repeat(counter).concat('}'));
-        }
-      } else if (!array[i].includes(':')) {
-        result.push(' '.repeat(spaces(array[i])).concat(`${array[i].slice(1)}`));
-      } else {
-        result.push(' '.repeat(spaces(array[i])).concat(`${array[i].slice(1)}\n`.concat(' '.repeat(spaces(array[i]) - 2)).concat('}')));
       }
     }
+    else {
+      result.push(`${spaces(currentLevel)}${lineContent}`);
+    }
   }
+
   return result.join('\n');
 }
+
 export default stylish;
