@@ -10,7 +10,7 @@ function stylish(str) {
   for (let i = 0; i < array.length; i += 1) {
     const currentLevel = Number(array[i][0]);
     const nextLevel = Number(array[i + 1]?.[0]);
-    const lineContent = array[i].slice(1); 
+    const lineContent = array[i].slice(1);
 
     if (array[i] === '}' || array[i] === '{') {
       result.push(array[i]);
@@ -28,11 +28,10 @@ function stylish(str) {
       result.push(`${spaces(currentLevel)}${lineContent}`);
       if (currentLevel > 0) {
         for (let j = 0; j < currentLevel; j += 1) {
-          result.push(`${spaces(currentLevel - j - 1 )}  }`);
+          result.push(`${spaces(currentLevel - j - 1)}  }`);
         }
       }
-    }
-    else {
+    } else {
       result.push(`${spaces(currentLevel)}${lineContent}`);
     }
   }
