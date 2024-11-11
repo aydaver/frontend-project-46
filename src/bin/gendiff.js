@@ -26,7 +26,6 @@ const command = (file1path, file2path, options) => {
   const { format } = options;
   const diff = gendiff(parse(file1path, file2path));
   console.log(formatters[format](diff));
-  console.log(diff);
 };
 
 program
