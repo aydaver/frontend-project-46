@@ -8,13 +8,7 @@ const parser = (file1path, file2path) => {
       JSON.parse(fs.readFileSync(file2path))];
     return resultArray;
   }
-  if (file1path.endsWith('yml') && file2path.endsWith('yml')) {
-    const resultArray = [
-      yaml.load(fs.readFileSync(file1path, 'utf8')),
-      yaml.load(fs.readFileSync(file2path, 'utf8'))];
-    return resultArray;
-  }
-  if (file1path.endsWith('yaml') && file2path.endsWith('yaml')) {
+  if (file1path.endsWith('yml' || 'yaml') && file2path.endsWith('yml' || 'yaml')) {
     const resultArray = [
       yaml.load(fs.readFileSync(file1path, 'utf8')),
       yaml.load(fs.readFileSync(file2path, 'utf8'))];

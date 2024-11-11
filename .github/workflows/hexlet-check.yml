@@ -44,7 +44,7 @@ jobs:
         uses: paambaati/codeclimate-action@v5.0.0
 
         env:
-          CC_TEST_REPORTER_ID: fbe7faf04e21815079b5099e1e5f7c709d1a4fef34308d2c0a8a70a07a08892e
+          CC_TEST_REPORTER_ID: 1aada617bf3e36fb2ee8e9b185492c43fd91f3691a337404df769f7b89d2676c
         with:
           coverageCommand: make test-coverage
           debug: true
