@@ -27,9 +27,7 @@ function stylish(str) {
     } else if (array[i + 1] === '}') {
       result.push(`${spaces(currentLevel)}${lineContent}`);
       if (currentLevel > 0) {
-        for (let j = 0; j < currentLevel; j += 1) {
-          result.push(`${spaces(currentLevel - 1)}  }`);
-        }
+        result.push(`${spaces(currentLevel - 1)}  }`.repeat(currentLevel));
       }
     } else {
       result.push(`${spaces(currentLevel)}${lineContent}`);
