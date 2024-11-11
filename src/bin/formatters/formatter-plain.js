@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const arr = (string) => string.split(' ');
 const deepLvl = (str) => Number(str?.[0]);
 const getPath = (array, string) => {
@@ -55,17 +56,11 @@ function plain(string) {
     const filterArr = array.filter((str) => str.startsWith(array[i][0]) && arr(str)[1] === prop);
     if (array[i].includes('+')) {
       const prev = arr(array[i - 1]);
-      if (prop === prev[1]) {
-        result.push(handleUpdate(array, i, prop, rest));
-      } else if (deepLvl(array[i]) < deepLvl(array[i - 1])) {
-        if (deepLvl(array[i]) < deepLvl(array[i + 1])) {
-          result.push(`Property ${getPath(array, array[i])} was added. With value: [complex value]`);
-        } else if (filterArr.length === 2) {
-          result.push(handleComplexUpdate(array, i, prop, filterArr));
-        }
-      } else {
-        result.push(handleAddition(array, i, prop, rest));
-      }
+      if (prop === prev[1]) result.push(handleUpdate(array, i, prop, rest));
+      else if (deepLvl(array[i]) < deepLvl(array[i - 1])) {
+        if (deepLvl(array[i]) < deepLvl(array[i + 1])) result.push(`Property ${getPath(array, array[i])} was added. With value: [complex value]`);
+        else if (filterArr.length === 2) result.push(handleComplexUpdate(array, i, prop, filterArr));
+      } else result.push(handleAddition(array, i, prop, rest));
     } else if (array[i].includes('-')) {
       const next = arr(array[i + 1]);
       const removalMessage = handleRemoval(array, i, prop, next, filterArr);
