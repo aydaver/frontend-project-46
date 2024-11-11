@@ -33,7 +33,7 @@ function gendiff(objects) {
       } else if (value2 === null && value1 !== null) {
         handleValue(key, value1, '-', indent);
         result.push(`${indent}+ ${key}: null`);
-      } else if (typeof value1 === 'object' && value1 !== null && typeof value2 === 'object' && value2 !== null && !Array.isArray(value1) && !Array.isArray(value2)) {
+      } else if (typeof value1 === 'object' && value1 !== null && typeof value2 === 'object' && value2 !== null) {
         result.push(`${indent}  ${key}:`);
         compareObjects(value1, value2, indent + 1);
       } else if (value1 === value2) {

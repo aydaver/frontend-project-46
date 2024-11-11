@@ -20,7 +20,7 @@ function stylish(str) {
       result.push(`${spaces(currentLevel)}${lineContent}`);
       if (currentLevel - nextLevel > 1) {
         for (let j = 0; j < currentLevel - nextLevel - 1; j += 1) {
-          result.push(`${spaces(currentLevel - j - 1)}  }`);
+          result.push(`${spaces(currentLevel - 1)}  }`);
         }
       }
       result.push(`${spaces(nextLevel)}  }`);
@@ -28,7 +28,7 @@ function stylish(str) {
       result.push(`${spaces(currentLevel)}${lineContent}`);
       if (currentLevel > 0) {
         for (let j = 0; j < currentLevel; j += 1) {
-          result.push(`${spaces(currentLevel - j - 1)}  }`);
+          result.push(`${spaces(currentLevel - 1)}  }`);
         }
       }
     } else {
