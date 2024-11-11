@@ -18,6 +18,6 @@ const parser = (file1path, file2path) => {
       parseFile(file1path, yaml.load),
       parseFile(file2path, yaml.load)];
   }
-  return 'error';
+  return 'error boobs';
 };
 export default parser;
