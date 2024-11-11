@@ -1,21 +1,36 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable max-len */
 const arr = (string) => string.split(' ');
 const deepLvl = (str) => Number(str?.[0]);
-const getPath = (array, string) => {
-  let startIndex = array.indexOf(string);
-  const result = [arr(string)[1].slice(0, -1)];
-  if ((string) === 0) {
-    return result[0];
-  }
+const findParentPaths = (array, startIndex, result) => {
   for (let i = startIndex - 1; deepLvl(array[i]) >= 0; i -= 1) {
-    if (deepLvl(array[i]) === 0 && arr(array[i])[2] !== undefined) {
+    const currentLevel = deepLvl(array[i]);
+    if (currentLevel === 0 && arr(array[i])[2] !== undefined) {
       result.push(arr(array[i])[2].slice(0, -1));
       break;
-    } else if (deepLvl(array[startIndex]) > deepLvl(array[i])) {
+    } else if (currentLevel < deepLvl(array[startIndex])) {
       result.push(arr(array[i])[2].slice(0, -1));
       startIndex = i;
     }
   }
+};
+
+const extractName = (string) => arr(string)[1].slice(0, -1);
+
+const getPath = (array, targetString) => {
+  const startIndex = array.indexOf(targetString);
+  if (startIndex === -1) {
+    return ''; // Возвращаем пустую строку, если строка не найдена
+  }
+
+  const result = [extractName(targetString)];
+
+  if (deepLvl(targetString) === 0) { // Проверяем уровень вложенности сразу
+    return result[0];
+  }
+
+  findParentPaths(array, startIndex, result);
+
   return result.reverse().join('.');
 };
 

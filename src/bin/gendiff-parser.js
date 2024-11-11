@@ -1,20 +1,23 @@
 import fs from 'fs';
 import yaml from 'js-yaml';
 
+const parseFile = (filePath, parseFunction) => parseFunction(fs.readFileSync(filePath, 'utf8'));
+
 const parser = (file1path, file2path) => {
-  if (file1path.endsWith('json') && file2path.endsWith('json')) {
-    const resultArray = [
-      JSON.parse(fs.readFileSync(file1path)),
-      JSON.parse(fs.readFileSync(file2path))];
-    return resultArray;
+  const jsonCheck = file1path.endsWith('json') && file2path.endsWith('json');
+  const yamlCheck = (file1path.endsWith('yml') || file1path.endsWith('yaml'))
+                    && (file2path.endsWith('yml') || file2path.endsWith('yaml'));
+
+  if (jsonCheck) {
+    return [
+      parseFile(file1path, JSON.parse),
+      parseFile(file2path, JSON.parse)];
   }
-  if (file1path.endsWith('yml' || 'yaml') && file2path.endsWith('yml' || 'yaml')) {
-    const resultArray = [
-      yaml.load(fs.readFileSync(file1path, 'utf8')),
-      yaml.load(fs.readFileSync(file2path, 'utf8'))];
-    return resultArray;
+  if (yamlCheck) {
+    return [
+      parseFile(file1path, yaml.load),
+      parseFile(file2path, yaml.load)];
   }
   return 'error';
 };
-
 export default parser;
