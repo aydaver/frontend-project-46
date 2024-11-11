@@ -23,6 +23,7 @@ const typiser = (string) => {
   }
   return `'${string}'`;
 };
+
 function plain(string) {
   const array = string.split('\n');
   const result = [];
@@ -31,12 +32,10 @@ function plain(string) {
     const filterArr = array.filter((str) => str.startsWith(array[i][0]) && arr(str)[1] === prop);
     if (array[i].includes('+')) {
       const prev = arr(array[i - 1]);
-      if (prop === prev[1]) {
-        result.push(`Property ${getPath(array, array[i])} was updated. From ${typiser(prev[2])} to ${typiser(rest.join(' '))}`);
-      } else if (deepLvl(array[i]) < deepLvl(array[i - 1])) {
-        if (deepLvl(array[i]) < deepLvl(array[i + 1])) {
-          result.push(`Property ${getPath(array, array[i])} was added. With value: [complex value]`);
-        } else if (filterArr.length === 2) {
+      if (prop === prev[1]) result.push(`Property ${getPath(array, array[i])} was updated. From ${typiser(prev[2])} to ${typiser(rest.join(' '))}`);
+      else if (deepLvl(array[i]) < deepLvl(array[i - 1])) {
+        if (deepLvl(array[i]) < deepLvl(array[i + 1])) result.push(`Property ${getPath(array, array[i])} was added. With value: [complex value]`);
+        else if (filterArr.length === 2) {
           const value = filterArr[filterArr.indexOf(array[i])];
           result.push(`Property ${getPath(array, array[i])} was updated. From [complex value] to ${typiser(value)}`);
         }
@@ -46,9 +45,7 @@ function plain(string) {
       }
     } else if (array[i].includes('-')) {
       const next = arr(array[i + 1]);
-      if (prop !== next[1] && filterArr.length !== 2) {
-        result.push(`Property ${getPath(array, array[i])} was removed.`);
-      }
+      if (prop !== next[1] && filterArr.length !== 2) result.push(`Property ${getPath(array, array[i])} was removed.`);
     }
   }
   return result.join('\n');
