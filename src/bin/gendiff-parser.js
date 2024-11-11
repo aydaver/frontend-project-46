@@ -5,15 +5,15 @@ const parseFile = (filePath, parseFunction) => parseFunction(fs.readFileSync(fil
 
 const parser = (file1path, file2path) => {
   const jsonCheck = file1path.endsWith('json') && file2path.endsWith('json');
-  const yamlCheck = (file1path.endsWith('yml') || file1path.endsWith('yaml'))
-                    && (file2path.endsWith('yml') || file2path.endsWith('yaml'));
+  const ymlCheck = file1path.endsWith('yml') && file2path.endsWith('yml');
+  const yamlCheck = file1path.endsWith('yaml') && file2path.endsWith('yaml');
 
   if (jsonCheck) {
     return [
       parseFile(file1path, JSON.parse),
       parseFile(file2path, JSON.parse)];
   }
-  if (yamlCheck) {
+  if (yamlCheck || ymlCheck) {
     return [
       parseFile(file1path, yaml.load),
       parseFile(file2path, yaml.load)];
