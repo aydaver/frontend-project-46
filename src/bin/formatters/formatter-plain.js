@@ -1,5 +1,5 @@
 const arr = (string) => string.split(' ');
-const deepLvl = (str) => Number(str[0]);
+const deepLvl = (str) => Number(str?.[0]);
 const getPath = (array, string) => {
   let startIndex = array.indexOf(string);
   const result = [arr(string)[1].slice(0, -1)];
